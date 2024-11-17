@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa nhân viên</title>
+</head>
+<body>
+<h2>Sửa thông tin nhân viên</h2>
+<form th:action="@{/edit}" th:object="${employee}" method="post">
+    <label for="fullName">Họ và tên:</label>
+    <input type="text" id="fullName" th:field="*{fullName}" required><br>
+    <label for="address">Địa chỉ:</label>
+    <input type="text" id="address" th:field="*{address}" required><br>
+    <label for="phone">Số điện thoại:</label>
+    <input type="text" id="phone" th:field="*{phone}" required><br>
+    <label for="department">Phòng ban:</label>
+    <select id="department" th:field="*{department.departmentId}" required>
+        <option th:each="department : ${departments}"
+                th:value="${department.departmentId}"
+                th:text="${department.departmentName}"
+                th:selected="${department.departmentId == employee.department.departmentId}"></option>
+    </select><br>
+
+    <label for="status">Trạng thái:</label>
+    <input type="checkbox" id="status" th:field="*{status}"><br>
+    <button type="submit">Cập nhật</button>
+</form>
+<a href="/">Quay lại danh sách</a>
+</body>
+</html>

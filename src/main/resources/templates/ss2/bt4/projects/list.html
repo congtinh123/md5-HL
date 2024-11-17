@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Dự án</title>
+</head>
+<body>
+<h1>Danh sách Dự án</h1>
+
+<a th:href="@{/add}">Thêm Dự án Mới</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Tên Dự án</th>
+        <th>Mô tả</th>
+        <th>Công nghệ</th>
+        <th>Ngày bắt đầu</th>
+        <th>Ngày kết thúc</th>
+        <th>Khách hàng</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project : ${projects}">
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.technology}"></td>
+        <td th:text="${project.startDate}"></td>
+        <td th:text="${project.endDate}"></td>
+        <td th:text="${project.customer.fullName}"></td>
+        <td th:text="${project.status ? 'Hoạt động' : 'Không hoạt động'}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${project.id})}">Sửa</a>
+            <a th:href="@{/delete/{id}(id=${project.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa dự án này không?');">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/}">Quay lại trang chủ</a>
+</body>
+</html>

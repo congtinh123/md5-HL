@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>Danh Sách Sản Phẩm</h1>
+<a th:href="@{/ss1/baitap1/add}">Thêm mới</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên Sản Phẩm</th>
+        <th>Giá</th>
+        <th>Kho</th>
+        <th>Ngày Tạo</th>
+        <th>Trạng Thái</th>
+        <th th:colspan="2">Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Dùng Thymeleaf để duyệt qua danh sách sản phẩm -->
+    <tr th:each="product : ${products}">
+        <td th:text="${product.productId}"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.productPrice}"></td>
+        <td th:text="${product.productStock}"></td>
+        <td th:text="${product.created}"></td>
+        <td th:text="${product.status}"></td>
+        <td>
+            <a th:href="@{/ss1/baitap1/edit/{productId}(productId=${product.productId})}">Sửa</a>
+            <a th:href="@{/ss1/baitap1/delete/{productId}(productId=${product.productId})}">Xoá</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/ss1}">Quay lại trang chủ</a>
+</body>
+</html>

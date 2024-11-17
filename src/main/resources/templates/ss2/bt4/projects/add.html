@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Dự án</title>
+</head>
+<body>
+<h1>Thêm Dự án Mới</h1>
+
+<form th:action="@{/add}" th:object="${project}" method="post">
+    <label for="name">Tên Dự án:</label>
+    <input type="text" id="name" th:field="*{name}" required/>
+
+    <label for="description">Mô tả:</label>
+    <textarea id="description" th:field="*{description}" required></textarea>
+
+    <label for="technology">Công nghệ:</label>
+    <input type="text" id="technology" th:field="*{technology}" required/>
+
+    <label for="startDate">Ngày bắt đầu:</label>
+    <input type="date" id="startDate" th:field="*{startDate}" required/>
+
+    <label for="endDate">Ngày kết thúc:</label>
+    <input type="date" id="endDate" th:field="*{endDate}" required/>
+
+    <label for="customer">Khách hàng:</label>
+    <select id="customer" th:field="*{customer}" required>
+        <option value="" disabled selected>Chọn khách hàng</option> <!-- Tùy chọn mặc định -->
+        <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:text="${customer.fullName}"></option>
+    </select>
+
+    <button type="submit">Lưu</button>
+</form>
+
+<a href="/">Quay lại danh sách</a>
+</body>
+</html>

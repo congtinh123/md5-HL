@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Nhân Viên</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Danh Sách Nhân Viên</h1>
+<a th:href= "@{/ss1/baitap3/add}">Thêm Nhân Viên</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Họ Tên</th>
+        <th>Địa Chỉ</th>
+        <th>Số Điện Thoại</th>
+        <th>Ngày Sinh</th>
+        <th>Trạng Thái</th>
+        <th>Hành Động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="account : ${accounts}">
+        <td th:text="${account.accountId}"></td>
+        <td th:text="${account.fullName}"></td>
+        <td th:text="${account.address}"></td>
+        <td th:text="${account.phone}"></td>
+        <td th:text="${account.dob}"></td>
+        <td th:text="${account.status} ? 'Kích hoạt' : 'Không kích hoạt'"></td>
+        <td>
+            <a th:href="@{/ss1/baitap3/edit/{accountId}(accountId=${account.accountId})}" class="btn">Chỉnh Sửa</a>
+            <a th:href="@{/ss1/baitap3/delete/{accountId}(accountId=${account.accountId})}" class="btn"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/ss1}">Quay lại trang chủ</a>
+</body>
+</html>

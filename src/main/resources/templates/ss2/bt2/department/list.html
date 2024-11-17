@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách phòng ban</title>
+</head>
+<body>
+<h2>Danh sách phòng ban</h2>
+<a href="/new">Thêm mới phòng ban</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên phòng ban</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.departmentId}"></td>
+        <td th:text="${department.departmentName}"></td>
+        <td th:text="${department.status ? 'Hoạt động' : 'Ngừng hoạt động'}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${department.departmentId})}">Sửa</a> |
+            <a th:href="@{/status/{id}(id=${department.departmentId})}">
+                Thay đổi trạng thái
+            </a>
+            <a th:href="@{/delete/{id}(id=${department.departmentId})}">Xoá</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/}">Quay trở lại</a>
+</body>
+</html>

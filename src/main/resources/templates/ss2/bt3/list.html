@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog List</title>
+</head>
+<body>
+<h1>Danh sách Blog</h1>
+
+<!-- Thêm liên kết để thêm blog mới -->
+<a th:href="@{/add}">Thêm Blog Mới</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Tiêu đề</th>
+        <th>Hình ảnh</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th> <!-- Thêm cột hành động -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog : ${blogPage.content}">
+        <td th:text="${blog.title}"></td>
+        <td>
+            <img th:src="@{${blog.image}}" alt="Blog Image" style="width:100px;height:auto;"/>
+        </td>
+        <td th:text="${blog.status ? 'Hoạt động' : 'Không hoạt động'}"></td>
+        <td>
+            <!-- Liên kết để sửa blog -->
+            <a th:href="@{/edit/{id}(id=${blog.blogId})}">Sửa</a>
+            <!-- Liên kết để xóa blog -->
+            <a th:href="@{/delete/{id}(id=${blog.blogId})}"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa blog này không?');">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <span>Trang: </span>
+    <span th:each="i : ${#numbers.sequence(0, blogPage.totalPages - 1)}">
+            <a th:href="@{/(page=${i})}" th:text="${i + 1}"></a>
+        <span th:if="${i < blogPage.totalPages - 1}">, </span>
+    </span>
+</div>
+<a th:href="@{/}">Quay lại trang chủ</a>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sản Phẩm</title>
+    <style>
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        div {
+            margin-bottom: 12px;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+        }
+        input, button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Thêm Mới Sản Phẩm</h1>
+<form th:action="@{/ss1/baitap1/add}" th:object="${product}" method="post">
+    <div>
+        <label for="productName">Tên Sản Phẩm:</label>
+        <input type="text" id="productName" th:field="*{name}" placeholder="Tên sản phẩm" required>
+    </div>
+    <div>
+        <label for="productPrice">Giá:</label>
+        <input type="number" id="productPrice" th:field="*{price}" step="0.01" placeholder="Giá sản phẩm" required>
+    </div>
+    <div>
+        <label for="productStock">Số Lượng:</label>
+        <input type="number" id="productStock" th:field="*{stock}" placeholder="Số lượng trong kho" required>
+    </div>
+    <div>
+        <button type="submit">Thêm Sản Phẩm</button>
+    </div>
+</form>
+<a th:href="@{/ss1/baitap1}">Quay lại trang chủ</a>
+
+</body>
+</html>

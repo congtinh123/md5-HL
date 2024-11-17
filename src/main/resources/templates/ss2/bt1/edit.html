@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chỉnh Sửa Nhân Viên</title>
+  <style>
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    div {
+      margin-bottom: 12px;
+    }
+    label {
+      display: inline-block;
+      width: 120px;
+    }
+    input, button {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Chỉnh Sửa Nhân Viên</h1>
+<form th:action="@{/edit}" th:object="${employee}" method="post">
+  <div>
+    <label for="fullName">Họ và Tên:</label>
+    <input type="text" id="fullName" th:field="*{fullName}" required>
+  </div>
+  <div>
+    <label for="address">Địa Chỉ:</label>
+    <input type="text" id="address" th:field="*{address}" required>
+  </div>
+  <div>
+    <label for="phone">Số Điện Thoại:</label>
+    <input type="text" id="phone" th:field="*{phone}" required>
+  </div>
+  <div>
+    <label for="dob">Ngày Sinh:</label>
+    <input type="date" id="dob" th:field="*{dob}" required>
+  </div>
+  <div>
+    <label for="status">Trạng Thái:</label>
+    <select id="status" th:field="*{status}">
+      <option value="true" th:selected="${employee.status}">Kích Hoạt</option>
+      <option value="false" th:selected="${!employee.status}">Ngừng Hoạt Động</option>
+    </select>
+  </div>
+  <div>
+    <button type="submit">Cập Nhật Nhân Viên</button>
+  </div>
+</form>
+
+</body>
+</html>

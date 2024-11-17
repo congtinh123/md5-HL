@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách nhân viên</title>
+</head>
+<body>
+<h2>Danh sách nhân viên</h2>
+<a th:href="@{/new}">Thêm mới nhân viên</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Họ và tên</th>
+        <th>Địa chỉ</th>
+        <th>Số điện thoại</th>
+        <th>Phòng ban</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.employeeId}"></td>
+        <td th:text="${employee.fullName}"></td>
+        <td th:text="${employee.address}"></td>
+        <td th:text="${employee.phone}"></td>
+        <td th:text="${employee.department != null ? employee.department.departmentName : 'Chưa có phòng ban'}"></td>
+        <td th:text="${employee.status ? 'Hoạt động' : 'Ngừng hoạt động'}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${employee.employeeId})}">Sửa</a> |
+            <a th:href="@{/status/{id}(id=${employee.employeeId})}">Thay đổi trạng thái</a> |
+            <a th:href="@{/delete/{id}(id=${employee.employeeId})}">Xoá</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/}">Quay lại trang chủ</a>
+</body>
+</html>

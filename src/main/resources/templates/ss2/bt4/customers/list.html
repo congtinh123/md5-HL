@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Khách hàng</title>
+</head>
+<body>
+<h1>Danh sách Khách hàng</h1>
+
+<a th:href="@{/add}">Thêm Khách hàng Mới</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Họ tên</th>
+        <th>Email</th>
+        <th>Địa chỉ</th>
+        <th>Điện thoại</th>
+        <th>Ngày sinh</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.customerId}"></td>
+        <td th:text="${customer.fullName}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.address}"></td>
+        <td th:text="${customer.phone}"></td>
+        <td th:text="${customer.dob}"></td>
+        <td th:text="${customer.status ? 'Hoạt động' : 'Không hoạt động'}"></td>
+        <td>
+            <a th:href="@{/edit/{id}(id=${customer.customerId})}">Sửa</a>
+            <a th:href="@{/delete/{id}(id=${customer.customerId})}"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này không?');">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/}">Quay lại trang chủ</a>
+</body>
+</html>
